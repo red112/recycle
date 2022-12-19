@@ -13,7 +13,6 @@ public class Feeder : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Application.targetFrameRate = 60;
 
         blocks = GetComponentsInChildren<Block>();
         Align();
@@ -52,13 +51,20 @@ public class Feeder : MonoBehaviour
         nowBlock = (nowBlock + 1) % blockCount;
     }
 
-    [ContextMenu("Do Move")]
-    void Select()
+    //[ContextMenu("Do Move")]
+    public void Select(int selectType)
     {
-        bool result = blocks[nowBlock].Check(0);
+        bool result = blocks[nowBlock].Check(selectType);
 
+        if(result)
+        {
+            StartCoroutine(Move());
+        }
+        else
+        {
 
-        StartCoroutine(Move());
+        }
+            
     }
 
     // Update is called once per frame

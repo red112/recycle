@@ -7,7 +7,7 @@ public class Block : MonoBehaviour
     public Rigidbody[] characters;
     public int type;
 
-    float hit_power = 4f;
+    float hit_power = 7f;
 
 
     Feeder feeder;
@@ -59,36 +59,43 @@ public class Block : MonoBehaviour
 
     public bool Check(int selectType)
     {
-        bool resutl = type == selectType;
+        bool result = type == selectType;
 
-        if(true)//result)
-            StartCoroutine(Hit());
+        if(result)
+            StartCoroutine(Hit(selectType));
 
-        return resutl;
+        return result;
     }
 
-    IEnumerator Hit()
+    IEnumerator Hit(int type)
     {
         characters[type].isKinematic = false;
         yield return new WaitForFixedUpdate();
 
 
-        int ran = Random.Range(0, 2);
+        //int ran = Random.Range(0, 2);
         Vector3 forceVec = Vector3.zero;
         Vector3 torqueVec = Vector3.zero;
 
-        switch (ran)
+        switch (type)//ran)
         {
             case 0:
-                forceVec = (Vector3.right + Vector3.up*2f) * hit_power;
-                torqueVec = (Vector3.forward + Vector3.down) * hit_power;
+                forceVec = (Vector3.right * 0.5f + Vector3.back * 1.5f + Vector3.up * 2.5f) * hit_power;
+                torqueVec = (Vector3.forward + Vector3.down) * hit_power * 0.5f;
                 characters[type].AddForce(forceVec, ForceMode.Impulse);
                 characters[type].AddTorque(torqueVec, ForceMode.Impulse);
                 break;
 
             case 1:
-                forceVec = (Vector3.left + Vector3.up*2f) * hit_power;
-                torqueVec = (Vector3.back + Vector3.up) * hit_power;
+                forceVec = (Vector3.left + Vector3.back + Vector3.up) * hit_power;
+                torqueVec = (Vector3.back + Vector3.up) * hit_power * 0.5f;
+                characters[type].AddForce(forceVec, ForceMode.Impulse);
+                characters[type].AddTorque(torqueVec, ForceMode.Impulse);
+                break;
+
+            case 2:
+                forceVec = ( Vector3.right * 1.5f + Vector3.back + Vector3.up * 0.5f) * hit_power;
+                torqueVec = (Vector3.back + Vector3.up) * hit_power * 0.5f;
                 characters[type].AddForce(forceVec, ForceMode.Impulse);
                 characters[type].AddTorque(torqueVec, ForceMode.Impulse);
                 break;
