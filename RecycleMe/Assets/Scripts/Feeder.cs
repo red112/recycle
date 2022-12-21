@@ -15,11 +15,11 @@ public class Feeder : MonoBehaviour
     {
 
         blocks = GetComponentsInChildren<Block>();
-        Align();
+        //Align();
         
     }
 
-    void Align()
+    public void Align()
     {
         blockCount = blocks.Length;
         if(blockCount == 0)
@@ -33,6 +33,7 @@ public class Feeder : MonoBehaviour
         for(int index=0; index < blockCount; index++)
         {
             blocks[index].transform.Translate(0, 0, index * blockSize * -1);
+            blocks[index].Init();
         }
     }
 
@@ -58,10 +59,12 @@ public class Feeder : MonoBehaviour
 
         if(result)
         {
+            GameManager.Success();
             StartCoroutine(Move());
         }
         else
         {
+            GameManager.Fail();
 
         }
             

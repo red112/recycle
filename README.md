@@ -9,7 +9,8 @@ Recycle for Earth
 https://www.youtube.com/watch?v=4JTPXorri18
 
 * 색상을 재질에 대응하여 분리수거 게임으로 변경
-
+- 해결 할 문제 
+ . 빠르게 연속으로 입력하면 새로운 블럭 추가가 되지 않음.=>framerate가 느리면 발생.
 
 ## [도서]
 

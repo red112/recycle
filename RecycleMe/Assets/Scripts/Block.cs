@@ -15,7 +15,7 @@ public class Block : MonoBehaviour
     void Start()
     {
         feeder = GetComponentInParent<Feeder>();
-        Init();
+        //Init();
     }
 
     private void LateUpdate()
@@ -33,7 +33,7 @@ public class Block : MonoBehaviour
         
     }
 
-    void Init()
+    public void Init()
     {
         type = Random.Range(0, 3);
         for (int index=0; index < characters.Length; index++)
