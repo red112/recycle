@@ -24,6 +24,10 @@ public class GameManager : MonoBehaviour
     public GameObject uiGameStart;
     public GameObject uiNewRecord;
 
+    [Header("Effect")]
+    public ParticleSystem particle;
+    public Animator anim;
+
 
     static GameManager instance;
 
@@ -60,12 +64,17 @@ public class GameManager : MonoBehaviour
 
         playComboTime = 0;
 
+        instance.particle.Play();
+        instance.anim.SetTrigger("Hit");
+        SoundManager.PlaySound("Hit");
+
     }
 
     public static void Fail()
     {
         playTime += 10f;
         combo = 0;
+        SoundManager.PlaySound("Fail");
 
     }
 
@@ -110,6 +119,8 @@ public class GameManager : MonoBehaviour
         //uiGameOver.SetActive(false);
 
         instance.StartCoroutine(instance.ComboTime());
+        SoundManager.PlaySound("Start");
+        SoundManager.BgmStart();
     }
 
     void GameOver()
@@ -122,6 +133,7 @@ public class GameManager : MonoBehaviour
         uiGameOver.SetActive(true);
 
         float maxScore = PlayerPrefs.GetFloat("Score");
+        SoundManager.PlaySound("Over");
 
         if (score > maxScore)
         {
@@ -131,6 +143,8 @@ public class GameManager : MonoBehaviour
         else
             uiNewRecord.SetActive(false);
 
+        
+        SoundManager.BgmStop();
 
     }
 

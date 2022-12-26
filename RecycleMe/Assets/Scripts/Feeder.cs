@@ -49,7 +49,7 @@ public class Feeder : MonoBehaviour
         }
 
         transform.position = Vector3.forward * nextZ;
-        nowBlock = (nowBlock + 1) % blockCount;
+       
     }
 
     //[ContextMenu("Do Move")]
@@ -61,6 +61,7 @@ public class Feeder : MonoBehaviour
         {
             GameManager.Success();
             StartCoroutine(Move());
+            nowBlock = (nowBlock + 1) % blockCount;
         }
         else
         {
